@@ -1,0 +1,5 @@
+# Node.js modules folder.
+node_modules/
+
+# Finder settings file (MacOS).
+.DS_Store

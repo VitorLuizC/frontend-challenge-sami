@@ -12,11 +12,19 @@ const createConfiguration = (_, { mode = 'development' }) => ({
   output: {
     path: path.resolve(__dirname, './dist'),
   },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
+  },
   module: {
     rules: [
       {
         test: /\.tsx?$/i,
-        use: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+          options: require('./.babelrc.js'),
+        },
+        include: [path.resolve(__dirname, './src')],
+        exclude: /node_modules/,
       },
     ],
   },

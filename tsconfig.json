@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    // Module settings
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+
+    // Type-check settings
+    "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+
+    // Type declaration settings
+    "types": []
+  },
+  "include": ["./src"],
+  "exclude": ["./node_modules"]
+}

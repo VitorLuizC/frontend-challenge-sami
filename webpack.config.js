@@ -1,6 +1,7 @@
 // @ts-check
 
 const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 /**
  * Webpack configuration factory.
@@ -28,6 +29,13 @@ const createConfiguration = (_, { mode = 'development' }) => ({
       },
     ],
   },
+  plugins: [
+    new HTMLWebpackPlugin({
+      template: path.resolve(__dirname, './public/index.ejs'),
+      filename: 'index.html',
+      minify: mode !== 'development',
+    }),
+  ],
 });
 
 module.exports = createConfiguration;

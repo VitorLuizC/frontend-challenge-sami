@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "prettier --check \"src/**/*.tsx\"",
     "lint:fix": "prettier --write \"src/**/*.tsx\"",
-    "build": "webpack"
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",

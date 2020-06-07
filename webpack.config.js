@@ -4,6 +4,11 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 /**
+ * The `webpack-dev-server` port.
+ */
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3001;
+
+/**
  * Webpack configuration factory.
  * @type {import('webpack').ConfigurationFactory}
  */
@@ -16,14 +21,20 @@ const createConfiguration = (_, { mode = 'development' }) => ({
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
   },
+  devServer: {
+    port: PORT,
+    compress: true,
+    contentBase: path.resolve(__dirname, './dist'),
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
-        test: /\.tsx?$/i,
         use: {
           loader: 'babel-loader',
           options: require('./.babelrc.js'),
         },
+        test: /\.tsx?$/i,
         include: [path.resolve(__dirname, './src')],
         exclude: /node_modules/,
       },

@@ -7,8 +7,6 @@ import React, {
 } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 
-import type Hero from '../services/Hero';
-
 import ProgressBar from '../components/ProgressBar';
 import { HERO } from '../routers/routes';
 import searchHeros from '../services/searchHeros';
@@ -20,15 +18,13 @@ export default function Heros(_props: Props) {
   const [term, setTerm] = useState('');
   const [value, setValue] = useState('');
   const [loading, setLoading] = useState(false);
-  const [heros, setHeros] = useState<Hero[]>([]);
+  const [heros, setHeros] = useState<{ id: string; name: string }[]>([]);
 
   useEffect(() => {
     if (term) {
       setLoading(true);
       searchHeros(term)
-        .then((results) => {
-          setHeros(results.results);
-        })
+        .then(setHeros)
         .finally(() => setLoading(false));
     }
   }, [term]);

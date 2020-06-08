@@ -40,7 +40,7 @@ const Progress = styled.progress`
  */
 export default function ProgressBar() {
   const container = usePortalContainer('progress-bar');
-  const [percent, setPercent] = useState<number>(0);
+  const [percent, setPercent] = useState<number>(75);
 
   useAnimationFrame(() =>
     setPercent((percent) => {

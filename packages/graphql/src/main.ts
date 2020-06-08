@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import express from 'express';
 
 import pkg from '../package.json';
+import resolvers from './Hero/resolvers';
+import typeDefs from './Hero/typeDefs';
 
 dotenv.config();
 
@@ -13,10 +15,13 @@ const server = new ApolloServer({
     type Query {
       version: String!
     }
+
+    ${typeDefs}
   `,
   resolvers: {
     Query: {
       version: () => pkg.version,
+      ...resolvers.Query,
     },
   },
 });

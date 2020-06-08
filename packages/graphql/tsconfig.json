@@ -1,6 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    // Module settings
+    "resolveJsonModule": true,
+
     // Type declaration settings
     "types": ["node"],
     "lib": ["ESNext"]

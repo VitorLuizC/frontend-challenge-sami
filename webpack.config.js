@@ -1,7 +1,11 @@
 // @ts-check
 
 const path = require('path');
+const dotenv = require('dotenv');
+const { DefinePlugin } = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+
+dotenv.config();
 
 /**
  * The `webpack-dev-server` port.
@@ -45,6 +49,9 @@ const createConfiguration = (_, { mode = 'development' }) => ({
       template: path.resolve(__dirname, './public/index.ejs'),
       filename: 'index.html',
       minify: mode !== 'development',
+    }),
+    new DefinePlugin({
+      'process.env.TOKEN': process.env.TOKEN,
     }),
   ],
 });

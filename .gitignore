@@ -9,3 +9,6 @@ node_modules/
 
 # Compiled chunks & bundles for distribution.
 dist/
+
+# Environment variables.
+.env

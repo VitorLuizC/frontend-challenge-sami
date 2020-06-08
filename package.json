@@ -1,40 +1,11 @@
 {
   "private": true,
-  "name": "frontend-challenge-sami",
+  "name": "@frontend-challenge-sami/root",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "prettier --check \"src/**/*.tsx\"",
-    "lint:fix": "prettier --write \"src/**/*.tsx\"",
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.2",
-    "@babel/preset-env": "^7.10.2",
-    "@babel/preset-react": "^7.10.1",
-    "@babel/preset-typescript": "^7.10.1",
-    "@types/babel__core": "^7.1.8",
-    "@types/node": "^14.0.11",
-    "@types/prettier": "^2.0.1",
-    "@types/react": "^16.9.35",
-    "@types/react-dom": "^16.9.8",
-    "@types/react-router-dom": "^5.1.5",
-    "@types/styled-components": "^5.1.0",
-    "babel-loader": "^8.1.0",
-    "dotenv": "^8.2.0",
-    "html-webpack-plugin": "^4.3.0",
-    "prettier": "^2.0.5",
-    "typescript": "^3.9.5",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
-  },
-  "dependencies": {
-    "core-js": "^3.6.5",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
-    "styled-components": "^5.1.1"
+    "pnpm": "^5.1.4"
   }
 }

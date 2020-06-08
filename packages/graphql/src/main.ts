@@ -1,6 +1,10 @@
-import pkg from '../package.json';
-import express from 'express';
 import { ApolloServer, gql } from 'apollo-server-express';
+import dotenv from 'dotenv';
+import express from 'express';
+
+import pkg from '../package.json';
+
+dotenv.config();
 
 const app = express();
 

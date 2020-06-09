@@ -3,9 +3,11 @@
   "name": "@frontend-challenge-sami/root",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"pnpm run dev --filter @frontend-challenge-sami/graphql\" \"pnpm run start --filter @frontend-challenge-sami/web\""
   },
   "devDependencies": {
+    "concurrently": "^5.2.0",
     "pnpm": "^5.1.4"
   }
 }

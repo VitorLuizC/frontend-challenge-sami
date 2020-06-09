@@ -1,17 +1,22 @@
+import { ApolloError, IFieldResolver } from 'apollo-server-express';
 import fetch from 'node-fetch';
-import { IFieldResolver, ApolloError } from 'apollo-server-express';
+
+import fromSuperHeroAPICharacterToHero from '../mappers/fromSuperHeroAPICharacterToHero';
+
+import type { Hero } from './typeDefs';
+import type SuperHeroAPICharacter from './SuperHeroAPICharacter';
 
 const getBaseURL = () => `https://superheroapi.com/api/${process.env.TOKEN}`;
 
-const hero: IFieldResolver<unknown, unknown, { id: string }> = (_, { id }) =>
+const hero: IFieldResolver<unknown, unknown, { id: string }> = (
+  _,
+  { id },
+): Promise<Hero> =>
   fetch(getBaseURL() + '/' + id, {
     method: 'GET',
   })
     .then((response) => response.json())
-    .then((result) => {
-      console.log(result, getBaseURL());
-      return result;
-    });
+    .then(fromSuperHeroAPICharacterToHero);
 
 const searchHeros: IFieldResolver<unknown, unknown, { name: string }> = (
   _,
@@ -23,8 +28,11 @@ const searchHeros: IFieldResolver<unknown, unknown, { name: string }> = (
     .then((response) => response.json())
     .then((data) => {
       if (data.response !== 'success')
-        throw new ApolloError('Unknown error with superheroapi.');
+        throw new ApolloError('Unknown error with SuperHeroAPI.');
       return data.results ?? [];
+    })
+    .then((heros: SuperHeroAPICharacter[]) => {
+      return heros.map(fromSuperHeroAPICharacterToHero);
     });
 
 const resolvers = {

@@ -1,52 +1,38 @@
-import React, {
-  ChangeEvent,
-  FormEvent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import React, { useCallback } from 'react';
+import { useQuery } from 'react-apollo';
+import { Link } from 'react-router-dom';
 
 import ProgressBar from '../components/ProgressBar';
+import SearchForm from '../components/SearchForm';
+import SEARCH_HEROS_QUERY, {
+  Result,
+  Variables,
+} from '../graphql/SEARCH_HEROS_QUERY';
+import useQueryParam from '../hooks/useQueryParam';
 import { HERO } from '../routers/routes';
-import searchHeros from '../services/searchHeros';
 import createLink from '../utils/createLink';
 
-type Props = RouteComponentProps<{}>;
+/**
+ * Component that renders Heros page.
+ */
+export default function Heros() {
+  const [name, setName] = useQueryParam('q', '');
 
-export default function Heros(_props: Props) {
-  const [term, setTerm] = useState('');
-  const [value, setValue] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [heros, setHeros] = useState<{ id: string; name: string }[]>([]);
-
-  useEffect(() => {
-    if (term) {
-      setLoading(true);
-      searchHeros(term)
-        .then(setHeros)
-        .finally(() => setLoading(false));
-    }
-  }, [term]);
-
-  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  }, []);
-
-  const handleSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      setTerm(value);
+  const { data, loading } = useQuery<Result, Variables>(SEARCH_HEROS_QUERY, {
+    fetchPolicy: 'cache-and-network',
+    skip: !name.trim(),
+    variables: {
+      name: name,
     },
-    [value],
-  );
+  });
+
+  const heros = data?.searchHeros ?? [];
+
+  const handleSearch = useCallback((name: string) => setName(name), []);
 
   return (
     <main>
-      <form onSubmit={handleSubmit}>
-        <input type="search" value={value} onChange={handleChange} />
-        <button type="submit">Pesquisar</button>
-      </form>
+      <SearchForm initialValue={name} onSearch={handleSearch} />
 
       {loading && <ProgressBar />}
 

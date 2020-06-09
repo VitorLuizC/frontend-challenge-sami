@@ -1,4 +1,5 @@
 import { useCallback, useRef, useLayoutEffect } from 'react';
+import useIsMounted from './useIsMounted';
 
 /**
  * Hook that runs received callback in animation frames.
@@ -6,8 +7,11 @@ import { useCallback, useRef, useLayoutEffect } from 'react';
  */
 export default function useAnimationFrame(callback: (time: number) => void) {
   const handleRef = useRef<number>();
+  const isMounted = useIsMounted();
 
   const run = useCallback((time: number) => {
+    if (!isMounted()) return;
+
     callback(time);
     handleRef.current = window.requestAnimationFrame(run);
   }, []);

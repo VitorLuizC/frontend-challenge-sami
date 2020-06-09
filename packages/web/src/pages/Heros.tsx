@@ -39,6 +39,13 @@ export default function Heros() {
       <ul>
         {heros.map((hero) => (
           <li key={hero.id}>
+            <figure>
+              <img
+                src={hero.avatar}
+                alt={hero.name}
+                title={`Avatar of ${hero.name}`}
+              />
+            </figure>
             {
               <Link to={createLink(HERO, { heroId: hero.id })}>
                 {hero.name}

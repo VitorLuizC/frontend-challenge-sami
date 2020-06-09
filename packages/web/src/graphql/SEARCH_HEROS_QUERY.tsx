@@ -14,6 +14,7 @@ export type Result = {
   searchHeros: Array<{
     id: string;
     name: string;
+    avatar: string;
   }>;
 };
 
@@ -25,6 +26,7 @@ const SEARCH_HEROS_QUERY = gql`
     searchHeros(name: $name) {
       id
       name
+      avatar
     }
   }
 `;
